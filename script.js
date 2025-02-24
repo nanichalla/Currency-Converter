@@ -2,7 +2,7 @@
 function fetchExchangeRates() {
     // Replace YOUR_API_KEY with your actual API key
     const apiKey = "YOUR_API_KEY";
-    const apiUrl = https://api.exchangerate-api.com/v4/latest/USD;
+    const apiUrl = `https://api.exchangerate-api.com/v4/latest/USD`;
 
     fetch(apiUrl)
         .then(response => response.json())
@@ -41,7 +41,7 @@ function convertCurrency() {
     // Make sure all fields are filled
     if (amount && sourceCurrency && targetCurrency) {
         // Fetch the conversion rate from an API
-        const apiUrl = https://api.exchangerate-api.com/v4/latest/USD;
+        const apiUrl = `https://api.exchangerate-api.com/v4/latest/USD`;
 
         fetch(apiUrl)
             .then(response => response.json())
@@ -52,7 +52,7 @@ function convertCurrency() {
 
                 // Perform the conversion
                 const convertedAmount = (amount / sourceRate) * targetRate;
-                resultDiv.textContent = ${amount} ${sourceCurrency} = ${convertedAmount.toFixed(2)} ${targetCurrency};
+                resultDiv.textContent = `${amount} ${sourceCurrency} = ${convertedAmount.toFixed(2)} ${targetCurrency}`;
             })
             .catch(error => console.log("Error fetching exchange rates:", error));
     } else {
