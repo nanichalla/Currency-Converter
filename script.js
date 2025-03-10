@@ -50,7 +50,7 @@ function convertCurrency() {
                 const sourceRate = rates[sourceCurrency];
                 const targetRate = rates[targetCurrency];
 
-                // Perform the conversion
+                  // Perform the conversion
                 const convertedAmount = (amount / sourceRate) * targetRate;
                 resultDiv.textContent = `${amount} ${sourceCurrency} = ${convertedAmount.toFixed(2)} ${targetCurrency}`;
             })
