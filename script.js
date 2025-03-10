@@ -1,64 +1,60 @@
-// Fetch exchange rates from an API
-function fetchExchangeRates() {
-    // Replace YOUR_API_KEY with your actual API key
-    const apiKey = "YOUR_API_KEY";
-    const apiUrl = `https://api.exchangerate-api.com/v4/latest/USD`;
-
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            const rates = data.rates;
-            const currencies = Object.keys(rates);
-
-            // Add currency options to source and target dropdown menus
-            const sourceCurrencySelect = document.getElementById("source");
-            const targetCurrencySelect = document.getElementById("target");
-
-            currencies.forEach(currency => {
-                const option = document.createElement("option");
-                option.text = currency;
-                sourceCurrencySelect.add(option);
-
-                const option2 = document.createElement("option");
-                option2.text = currency;
-                targetCurrencySelect.add(option2);
-            });
-        })
-        .catch(error => console.log("Error fetching exchange rates:", error));
+body {
+    font-family: 'Helvetica', sans-serif;
+    background-color: #f2f2f2;
+    color: #EFE1D1;
 }
 
-// Perform currency conversion
-function convertCurrency() {
-    const amountInput = document.getElementById("amount");
-    const sourceCurrencySelect = document.getElementById("source");
-    const targetCurrencySelect = document.getElementById("target");
-    const resultDiv = document.getElementById("result");
-
-    const amount = amountInput.value;
-    const sourceCurrency = sourceCurrencySelect.value;
-    const targetCurrency = targetCurrencySelect.value;
-
-    // Make sure all fields are filled
-    if (amount && sourceCurrency && targetCurrency) {
-        // Fetch the conversion rate from an API
-        const apiUrl = `https://api.exchangerate-api.com/v4/latest/USD`;
-
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                const rates = data.rates;
-                const sourceRate = rates[sourceCurrency];
-                const targetRate = rates[targetCurrency];
-
-                  // Perform the conversion
-                const convertedAmount = (amount / sourceRate) * targetRate;
-                resultDiv.textContent = `${amount} ${sourceCurrency} = ${convertedAmount.toFixed(2)} ${targetCurrency}`;
-            })
-            .catch(error => console.log("Error fetching exchange rates:", error));
-    } else {
-        resultDiv.textContent = "Please fill in all fields.";
-    }
+.converter {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #331D2C;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-// Fetch exchange rates on page load
-fetchExchangeRates();
+h1 {
+    text-align: center;
+    font-family: 'Georgia', serif;
+    color: #EFE1D1;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #A78295;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #EFE1D1;
+    color: #331D2C;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #A78295;
+    color: #F2F2F2;
+}
+
+#result {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #A78295;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: #3F2E3E;
+    color: #EFE1D1;
+}
